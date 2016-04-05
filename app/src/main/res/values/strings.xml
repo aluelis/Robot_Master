@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Robot Master</string>
+    <string name="action_settings">Settings</string>
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="conn_error">Can\'t connect</string>
+    <string name="autonomous">Autonomous mode</string>
+    <string name="manual">Manual mode</string>
+</resources>
