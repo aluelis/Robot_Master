@@ -60,70 +60,13 @@ public class MainActivity extends Activity implements OnTouchListener, OnClickLi
         btnAutonomous.setOnClickListener(this);
 
         ImageView ivForward = (ImageView) findViewById(R.id.ivUp);
-        ivForward.setOnTouchListener(new OnTouchListener() {
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
-                    bt.sendData("F");
-                    Log.d("sendData", "F");
-                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    bt.sendData("S");
-                    Log.d("sendData", "S");
-                }
-                return true;
-            }
-        });
+        ivForward.setOnTouchListener(this);
         ImageView ivBackward = (ImageView) findViewById(R.id.ivDown);
-        ivBackward.setOnTouchListener(new OnTouchListener() {
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
-                    bt.sendData("B");
-                    Log.d("sendData", "B");
-                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    bt.sendData("S");
-                    Log.d("sendData", "S");
-                }
-                return true;
-            }
-        });
+        ivBackward.setOnTouchListener(this);
         ImageView ivRight = (ImageView) findViewById(R.id.ivRight);
-        ivRight.setOnTouchListener(new OnTouchListener() {
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
-                    bt.sendData("R");
-                    Log.d("sendData", "R");
-                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    bt.sendData("S");
-                    Log.d("sendData", "S");
-                }
-                return true;
-            }
-        });
+        ivRight.setOnTouchListener(this);
         ImageView ivLeft = (ImageView) findViewById(R.id.ivLeft);
-        ivLeft.setOnTouchListener(new OnTouchListener() {
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
-                    bt.sendData("L");
-                    Log.d("sendData", "L");
-                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    bt.sendData("S");
-                    Log.d("sendData", "S");
-                }
-                return true;
-            }
-        });
-        ImageView ivStop = (ImageView) findViewById(R.id.ivStop);
-        ivStop.setOnTouchListener(new OnTouchListener() {
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
-                    bt.sendData("S");
-                    Log.d("sendData", "S");
-                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    bt.sendData("S");
-                    Log.d("sendData", "S");
-                }
-                return true;
-            }
-        });
+        ivLeft.setOnTouchListener(this);
 
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter == null) {
@@ -213,15 +156,6 @@ public class MainActivity extends Activity implements OnTouchListener, OnClickLi
                     Log.d("sendData", "S");
                 }
                 break;
-            case R.id.ivStop:
-                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
-                    bt.sendData("S");
-                    Log.d("sendData", "S");
-                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    bt.sendData("S");
-                    Log.d("sendData", "S");
-                }
-                break;
             case R.id.btnAutonomous:
                 bt.sendData("A");
                 if (!isAutonomous) {
@@ -237,6 +171,6 @@ public class MainActivity extends Activity implements OnTouchListener, OnClickLi
                 break;
 
         }
-        return false;
+        return true;
     }
 }

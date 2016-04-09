@@ -45,8 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icon_left"
-            android:layout_alignTop="@+id/ivStop"
-            android:layout_toLeftOf="@+id/ivStop" />
+            android:layout_below="@+id/ivUp"
+            android:layout_toLeftOf="@+id/ivUp" />
 
         <ImageView
             android:tint="@android:color/black"
@@ -55,18 +55,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icon_right"
-            android:layout_alignTop="@+id/ivStop"
-            android:layout_toRightOf="@+id/ivStop" />
-
-        <ImageView
-            android:tint="@android:color/black"
-            android:id="@+id/ivStop"
-            android:padding="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_stop"
             android:layout_below="@+id/ivUp"
-            android:layout_centerHorizontal="true" />
+            android:layout_toRightOf="@+id/ivUp" />
 
         <ImageView
             android:tint="@android:color/black"
@@ -74,9 +64,9 @@
             android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ivStop"
             android:src="@drawable/icon_down"
-            android:layout_centerHorizontal="true" />
+            android:layout_below="@+id/ivRight"
+            android:layout_toLeftOf="@+id/ivRight" />
 
     </RelativeLayout>
 
