@@ -7,20 +7,23 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends Activity implements OnTouchListener, OnClickListener {
     static private Button btnConnect, btnAutonomous;
     static boolean connected = false;
     static RelativeLayout control;
     private IBluetooth bt = null;
     private boolean isAutonomous = false;
     static final int REQUEST_ENABLE_BT = 3;
+
 
     static class handlerStatus extends Handler {
         @Override
@@ -57,15 +60,70 @@ public class MainActivity extends Activity implements OnClickListener {
         btnAutonomous.setOnClickListener(this);
 
         ImageView ivForward = (ImageView) findViewById(R.id.ivUp);
-        ivForward.setOnClickListener(this);
+        ivForward.setOnTouchListener(new OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
+                    bt.sendData("F");
+                    Log.d("sendData", "F");
+                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    bt.sendData("S");
+                    Log.d("sendData", "S");
+                }
+                return true;
+            }
+        });
         ImageView ivBackward = (ImageView) findViewById(R.id.ivDown);
-        ivBackward.setOnClickListener(this);
+        ivBackward.setOnTouchListener(new OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
+                    bt.sendData("B");
+                    Log.d("sendData", "B");
+                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    bt.sendData("S");
+                    Log.d("sendData", "S");
+                }
+                return true;
+            }
+        });
         ImageView ivRight = (ImageView) findViewById(R.id.ivRight);
-        ivRight.setOnClickListener(this);
+        ivRight.setOnTouchListener(new OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
+                    bt.sendData("R");
+                    Log.d("sendData", "R");
+                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    bt.sendData("S");
+                    Log.d("sendData", "S");
+                }
+                return true;
+            }
+        });
         ImageView ivLeft = (ImageView) findViewById(R.id.ivLeft);
-        ivLeft.setOnClickListener(this);
+        ivLeft.setOnTouchListener(new OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
+                    bt.sendData("L");
+                    Log.d("sendData", "L");
+                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    bt.sendData("S");
+                    Log.d("sendData", "S");
+                }
+                return true;
+            }
+        });
         ImageView ivStop = (ImageView) findViewById(R.id.ivStop);
-        ivStop.setOnClickListener(this);
+        ivStop.setOnTouchListener(new OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
+                    bt.sendData("S");
+                    Log.d("sendData", "S");
+                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    bt.sendData("S");
+                    Log.d("sendData", "S");
+                }
+                return true;
+            }
+        });
 
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter == null) {
@@ -91,7 +149,6 @@ public class MainActivity extends Activity implements OnClickListener {
         }
     }
 
-
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnConnect:
@@ -100,21 +157,6 @@ public class MainActivity extends Activity implements OnClickListener {
                 } else {
                     bt.disconnect();
                 }
-                break;
-            case R.id.ivUp:
-                bt.sendData("F");
-                break;
-            case R.id.ivDown:
-                bt.sendData("B");
-                break;
-            case R.id.ivLeft:
-                bt.sendData("L");
-                break;
-            case R.id.ivRight:
-                bt.sendData("R");
-                break;
-            case R.id.ivStop:
-                bt.sendData("S");
                 break;
             case R.id.btnAutonomous:
                 bt.sendData("A");
@@ -131,5 +173,70 @@ public class MainActivity extends Activity implements OnClickListener {
                 break;
 
         }
+    }
+
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (view.getId()) {
+            case R.id.ivUp:
+                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
+                    bt.sendData("F");
+                    Log.d("sendData", "F");
+                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    bt.sendData("S");
+                    Log.d("sendData", "S");
+                }
+                break;
+            case R.id.ivDown:
+                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
+                    bt.sendData("B");
+                    Log.d("sendData", "B");
+                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    bt.sendData("S");
+                    Log.d("sendData", "S");
+                }
+                break;
+            case R.id.ivLeft:
+                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
+                    bt.sendData("L");
+                    Log.d("sendData", "FL");
+                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    bt.sendData("S");
+                    Log.d("sendData", "S");
+                }
+                break;
+            case R.id.ivRight:
+                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
+                    bt.sendData("R");
+                    Log.d("sendData", "R");
+                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    bt.sendData("S");
+                    Log.d("sendData", "S");
+                }
+                break;
+            case R.id.ivStop:
+                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
+                    bt.sendData("S");
+                    Log.d("sendData", "S");
+                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    bt.sendData("S");
+                    Log.d("sendData", "S");
+                }
+                break;
+            case R.id.btnAutonomous:
+                bt.sendData("A");
+                if (!isAutonomous) {
+                    isAutonomous = true;
+                    btnAutonomous.setText(R.string.manual);
+                    control.setVisibility(View.GONE);
+                } else {
+                    isAutonomous = false;
+                    btnAutonomous.setText(R.string.autonomous);
+                    control.setVisibility(View.VISIBLE);
+                }
+            default:
+                break;
+
+        }
+        return false;
     }
 }
