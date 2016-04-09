@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/controlLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:src="@drawable/icon_up"
+        android:tint="@android:color/black" />
+
+    <ImageView
+        android:id="@+id/ivLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivUp"
+        android:layout_toLeftOf="@+id/ivUp"
+        android:padding="10dp"
+        android:src="@drawable/icon_left"
+        android:tint="@android:color/black" />
+
+    <ImageView
+        android:id="@+id/ivRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivUp"
+        android:layout_toRightOf="@+id/ivUp"
+        android:padding="10dp"
+        android:src="@drawable/icon_right"
+        android:tint="@android:color/black" />
+
+    <ImageView
+        android:id="@+id/ivDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivRight"
+        android:layout_toLeftOf="@+id/ivRight"
+        android:padding="10dp"
+        android:src="@drawable/icon_down"
+        android:tint="@android:color/black" />
+
+</RelativeLayout>

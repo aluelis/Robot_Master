@@ -2,72 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
 
-    <LinearLayout
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btnConnect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/disconnected" />
-        <Button
-            android:id="@+id/btnAutonomous"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/autonomous"
-            android:visibility="gone"/>
-    </LinearLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/controlLayout"
-        android:layout_width="fill_parent"
+    <Button
+        android:id="@+id/btnConnect"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone">
-        <ImageView
-            android:tint="@android:color/black"
-            android:id="@+id/ivUp"
-            android:padding="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_up"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+        android:text="@string/disconnected" />
 
-        <ImageView
-            android:tint="@android:color/black"
-            android:id="@+id/ivLeft"
-            android:padding="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_left"
-            android:layout_below="@+id/ivUp"
-            android:layout_toLeftOf="@+id/ivUp" />
+    <Button
+        android:id="@+id/btnAutonomous"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/autonomous"
+        android:visibility="gone" />
 
-        <ImageView
-            android:tint="@android:color/black"
-            android:id="@+id/ivRight"
-            android:padding="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_right"
-            android:layout_below="@+id/ivUp"
-            android:layout_toRightOf="@+id/ivUp" />
-
-        <ImageView
-            android:tint="@android:color/black"
-            android:id="@+id/ivDown"
-            android:padding="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_down"
-            android:layout_below="@+id/ivRight"
-            android:layout_toLeftOf="@+id/ivRight" />
-
-    </RelativeLayout>
+    <Button
+        android:id="@+id/btnButtonControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button"
+        android:visibility="gone" />
 
 </LinearLayout>
