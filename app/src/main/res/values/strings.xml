@@ -7,4 +7,5 @@
     <string name="autonomous">Autonomous mode</string>
     <string name="manual">Manual mode</string>
     <string name="button">Button Control</string>
+    <string name="touch">Touch Control</string>
 </resources>

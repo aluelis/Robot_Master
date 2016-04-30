@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class ActivityMain extends Activity implements OnClickListener {
-    static private Button btnConnect, btnAutonomous, btnButton;
+    static private Button btnConnect, btnAutonomous, btnButton, btnTouch;
     static boolean connected = false;
     public static IBluetooth bt = null;
     private boolean isAutonomous = false;
@@ -27,11 +27,14 @@ public class ActivityMain extends Activity implements OnClickListener {
         btnConnect = (Button) findViewById(R.id.btnConnect);
         btnConnect.setOnClickListener(this);
 
-        btnAutonomous = (Button)findViewById(R.id.btnAutonomous);
+        btnAutonomous = (Button) findViewById(R.id.btnAutonomous);
         btnAutonomous.setOnClickListener(this);
 
-        btnButton = (Button)findViewById(R.id.btnButtonControl);
+        btnButton = (Button) findViewById(R.id.btnButtonControl);
         btnButton.setOnClickListener(this);
+
+        btnTouch = (Button) findViewById(R.id.btnTouchControl);
+        btnTouch.setOnClickListener(this);
 
 
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -51,7 +54,7 @@ public class ActivityMain extends Activity implements OnClickListener {
         if (requestCode == REQUEST_ENABLE_BT) {
             if (resultCode == Activity.RESULT_OK) {
                 bt = new IBluetooth(new handlerStatus(), ActivityMain.this);
-            }else{
+            } else {
                 Toast.makeText(this, "Enabled Bluetooth is required to use the app.", Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -69,11 +72,13 @@ public class ActivityMain extends Activity implements OnClickListener {
                 btnConnect.setText(R.string.connected);
                 btnAutonomous.setVisibility(View.VISIBLE);
                 btnButton.setVisibility(View.VISIBLE);
+                btnTouch.setVisibility(View.VISIBLE);
             } else if (status == IBluetooth.DISCONNECTED) {
                 connected = false;
                 btnConnect.setText(R.string.disconnected);
                 btnAutonomous.setVisibility(View.GONE);
                 btnButton.setVisibility(View.GONE);
+                btnTouch.setVisibility(View.GONE);
                 Log.d("STATE", "Disconnected");
             }
         }
@@ -91,15 +96,19 @@ public class ActivityMain extends Activity implements OnClickListener {
                 break;
             case R.id.btnAutonomous:
                 bt.sendData("A");
-                if(!isAutonomous){
+                if (!isAutonomous) {
                     isAutonomous = true;
                     btnAutonomous.setText(R.string.manual);
-                }else{
+                } else {
                     isAutonomous = false;
                     btnAutonomous.setText(R.string.autonomous);
                 }
             case R.id.btnButtonControl:
                 startActivity(new Intent(this, ActivityButton.class));
+                break;
+            case R.id.btnTouchControl:
+                startActivity(new Intent(this, ActivityTouch.class));
+                break;
             default:
                 break;
 

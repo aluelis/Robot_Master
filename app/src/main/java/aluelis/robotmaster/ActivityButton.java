@@ -12,6 +12,8 @@ import android.widget.ImageView;
  */
 public class ActivityButton extends Activity implements View.OnTouchListener{
 
+    final String SPEED = "255\n";
+    final String STOP = "0\n";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,37 +35,37 @@ public class ActivityButton extends Activity implements View.OnTouchListener{
         switch (view.getId()) {
             case R.id.ivUp:
                 if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
-                    ActivityMain.bt.sendData("F");
+                    ActivityMain.bt.sendData("F"+SPEED);
                     Log.d("sendData", "F");
                 }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    ActivityMain.bt.sendData("S");
+                    ActivityMain.bt.sendData("S"+STOP);
                     Log.d("sendData", "S");
                 }
                 break;
             case R.id.ivDown:
                 if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
-                    ActivityMain.bt.sendData("B");
+                    ActivityMain.bt.sendData("B"+SPEED);
                     Log.d("sendData", "B");
                 }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    ActivityMain.bt.sendData("S");
+                    ActivityMain.bt.sendData("S"+STOP);
                     Log.d("sendData", "S");
                 }
                 break;
             case R.id.ivLeft:
                 if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
-                    ActivityMain.bt.sendData("L");
+                    ActivityMain.bt.sendData("L"+SPEED);
                     Log.d("sendData", "FL");
                 }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    ActivityMain.bt.sendData("S");
+                    ActivityMain.bt.sendData("S"+STOP);
                     Log.d("sendData", "S");
                 }
                 break;
             case R.id.ivRight:
                 if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
-                    ActivityMain.bt.sendData("R");
+                    ActivityMain.bt.sendData("R"+SPEED);
                     Log.d("sendData", "R");
                 }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    ActivityMain.bt.sendData("S");
+                    ActivityMain.bt.sendData("S"+STOP);
                     Log.d("sendData", "S");
                 }
                 break;

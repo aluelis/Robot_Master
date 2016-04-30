@@ -25,4 +25,12 @@
         android:text="@string/button"
         android:visibility="gone" />
 
+    <Button
+        android:id="@+id/btnTouchControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/touch"
+        android:visibility="gone"
+        />
+
 </LinearLayout>
