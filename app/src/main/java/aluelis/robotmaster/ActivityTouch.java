@@ -6,7 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -17,13 +17,21 @@ public class ActivityTouch extends Activity {
 
     TouchView touchView;
     final int MAX_SPEED = 255;
-    final int xRperc = 60;
-    private final int FINGER_CIRCLE_SIZE = 25;
-    private final int BIG_CIRCLE_SIZE = 250;
+    private int FINGER_CIRCLE_SIZE;
+    private int BIG_CIRCLE_SIZE;
+    int screenWidth, screenHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getScreenSize();
+        if(getResources().getConfiguration().orientation == 1) {
+            BIG_CIRCLE_SIZE = (int) (screenWidth * 0.45);
+            FINGER_CIRCLE_SIZE = (int) (BIG_CIRCLE_SIZE * 0.1);
+        }else{
+            BIG_CIRCLE_SIZE = (int) (screenWidth * 0.2);
+            FINGER_CIRCLE_SIZE = (int) (BIG_CIRCLE_SIZE * 0.1);
+        }
         touchView = new TouchView(this);
         setContentView(touchView);
     }
@@ -32,7 +40,7 @@ public class ActivityTouch extends Activity {
 
         Paint fingerPaint, borderPaint, textPaint;
         int width, height;
-        float x, y, circX, circY, dragX, dragY;
+        float x, y, circX, circY;
         String debugText;
         boolean drag = false;
 
@@ -59,8 +67,13 @@ public class ActivityTouch extends Activity {
         @Override
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
-            width = Math.round((this.getRight() - this.getLeft()) / 2);
-            height = Math.round((this.getBottom() - this.getTop()) / 2);
+            if(getResources().getConfiguration().orientation == 1) {
+                width = Math.round((this.getRight() - this.getLeft()) / 2);
+                height = Math.round((this.getBottom() - this.getTop()) / 2);
+            }else{
+                width = (int) Math.round((this.getRight() - this.getLeft()) / 4.5);
+                height = 6 * Math.round((this.getBottom() - this.getTop()) / 10);
+            }
             if (!drag) {
                 x = width;
                 y = height;
@@ -142,4 +155,19 @@ public class ActivityTouch extends Activity {
         ActivityMain.bt.sendData(command);
         return command;
     }
+
+    private void getScreenSize(){
+        Display display = getWindowManager().getDefaultDisplay();
+        setWidth(display.getWidth());
+        setHeight(display.getHeight());
+    }
+
+    private void setWidth(int width){
+        screenWidth = width;
+    }
+
+    private void setHeight(int height){
+        screenHeight = height;
+    }
+
 }
