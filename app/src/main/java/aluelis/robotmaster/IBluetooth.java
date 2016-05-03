@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -12,6 +14,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -36,23 +39,15 @@ public class IBluetooth {
         this.context = context;
     }
 
-    public void connect() {
+    public void connect(BluetoothDevice device) {
 
-        Set<BluetoothDevice> setPairedDevices = mBluetoothAdapter.getBondedDevices();
-        BluetoothDevice[] pairedDevices = setPairedDevices.toArray(new BluetoothDevice[setPairedDevices.size()]);
-
-        for (BluetoothDevice pairedDevice : pairedDevices) {
-            if (pairedDevice.getName().contains("HC-05")) {
-                try {
-                    socket = pairedDevice.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
-                    InputStream receiveStream = socket.getInputStream();
-                    BufferedReader receiveReader = new BufferedReader(new InputStreamReader(receiveStream));
-                    sendStream = socket.getOutputStream();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-            }
+        try {
+            socket = device.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
+            InputStream receiveStream = socket.getInputStream();
+            //BufferedReader receiveReader = new BufferedReader(new InputStreamReader(receiveStream));
+            sendStream = socket.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         new Thread() {
@@ -77,6 +72,11 @@ public class IBluetooth {
         }.start();
     }
 
+    public void discover() {
+        mBluetoothAdapter.startDiscovery();
+        Log.d("BT", "discover");
+    }
+
     public void disconnect() {
         try {
             socket.close();
@@ -98,4 +98,28 @@ public class IBluetooth {
             e.printStackTrace();
         }
     }
+
+    public boolean createBond(BluetoothDevice bluetoothDevice) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            return bluetoothDevice.createBond();
+        } else {
+            //TODO reflection
+            throw new NoSuchMethodError();
+        }
+    }
+
+    public boolean checkBond(BluetoothDevice device) {
+
+        BluetoothDevice[] pairedDevices = mBluetoothAdapter.getBondedDevices().toArray(new BluetoothDevice[mBluetoothAdapter.getBondedDevices().size()]);
+
+        for (BluetoothDevice pairedDevice : pairedDevices) {
+            if (device.getAddress().equals(pairedDevice.getAddress())) {
+                connect(device);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

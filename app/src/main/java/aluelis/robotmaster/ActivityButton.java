@@ -2,6 +2,7 @@ package aluelis.robotmaster;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,10 +11,14 @@ import android.widget.ImageView;
 /**
  * Created by szvetlintanyi on 09/04/16.
  */
-public class ActivityButton extends Activity implements View.OnTouchListener{
+public class ActivityButton extends AppCompatActivity implements View.OnTouchListener{
 
-    final String SPEED = "255\n";
-    final String STOP = "0\n";
+    //+000-255
+    final String FORWARD = "+255+255\n";
+    final String BACK = "-255-255\n";
+    final String LEFT = "-255+255\n";
+    final String RIGHT = "+255-255\n";
+    final String STOP = "+000+000\n";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +26,21 @@ public class ActivityButton extends Activity implements View.OnTouchListener{
         setContentView(R.layout.activity_button);
 
         ImageView ivForward = (ImageView) findViewById(R.id.ivUp);
-        ivForward.setOnTouchListener(this);
+        if (ivForward != null) {
+            ivForward.setOnTouchListener(this);
+        }
         ImageView ivBackward = (ImageView) findViewById(R.id.ivDown);
-        ivBackward.setOnTouchListener(this);
+        if (ivBackward != null) {
+            ivBackward.setOnTouchListener(this);
+        }
         ImageView ivRight = (ImageView) findViewById(R.id.ivRight);
-        ivRight.setOnTouchListener(this);
+        if (ivRight != null) {
+            ivRight.setOnTouchListener(this);
+        }
         ImageView ivLeft = (ImageView) findViewById(R.id.ivLeft);
-        ivLeft.setOnTouchListener(this);
+        if (ivLeft != null) {
+            ivLeft.setOnTouchListener(this);
+        }
 
     }
 
@@ -35,38 +48,30 @@ public class ActivityButton extends Activity implements View.OnTouchListener{
         switch (view.getId()) {
             case R.id.ivUp:
                 if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
-                    ActivityMain.bt.sendData("F"+SPEED);
-                    Log.d("sendData", "F");
+                    ActivityMain.bt.sendData(FORWARD);
                 }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    ActivityMain.bt.sendData("S"+STOP);
-                    Log.d("sendData", "S");
+                    ActivityMain.bt.sendData(STOP);
                 }
                 break;
             case R.id.ivDown:
                 if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
-                    ActivityMain.bt.sendData("B"+SPEED);
-                    Log.d("sendData", "B");
+                    ActivityMain.bt.sendData(BACK);
                 }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    ActivityMain.bt.sendData("S"+STOP);
-                    Log.d("sendData", "S");
+                    ActivityMain.bt.sendData(STOP);
                 }
                 break;
             case R.id.ivLeft:
                 if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
-                    ActivityMain.bt.sendData("L"+SPEED);
-                    Log.d("sendData", "FL");
+                    ActivityMain.bt.sendData(LEFT);
                 }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    ActivityMain.bt.sendData("S"+STOP);
-                    Log.d("sendData", "S");
+                    ActivityMain.bt.sendData(STOP);
                 }
                 break;
             case R.id.ivRight:
                 if(motionEvent.getAction() == MotionEvent.ACTION_MOVE){
-                    ActivityMain.bt.sendData("R"+SPEED);
-                    Log.d("sendData", "R");
+                    ActivityMain.bt.sendData(RIGHT);
                 }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    ActivityMain.bt.sendData("S"+STOP);
-                    Log.d("sendData", "S");
+                    ActivityMain.bt.sendData(STOP);
                 }
                 break;
 

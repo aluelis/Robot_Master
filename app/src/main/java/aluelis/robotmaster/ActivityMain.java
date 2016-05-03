@@ -6,13 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class ActivityMain extends Activity implements OnClickListener {
+public class ActivityMain extends AppCompatActivity implements OnClickListener {
     static private Button btnConnect, btnAutonomous, btnButton, btnTouch;
     static boolean connected = false;
     public static IBluetooth bt = null;
@@ -25,16 +26,24 @@ public class ActivityMain extends Activity implements OnClickListener {
         setContentView(R.layout.activity_main);
 
         btnConnect = (Button) findViewById(R.id.btnConnect);
-        btnConnect.setOnClickListener(this);
+        if (btnConnect != null) {
+            btnConnect.setOnClickListener(this);
+        }
 
         btnAutonomous = (Button) findViewById(R.id.btnAutonomous);
-        btnAutonomous.setOnClickListener(this);
+        if (btnAutonomous != null) {
+            btnAutonomous.setOnClickListener(this);
+        }
 
         btnButton = (Button) findViewById(R.id.btnButtonControl);
-        btnButton.setOnClickListener(this);
+        if (btnButton != null) {
+            btnButton.setOnClickListener(this);
+        }
 
         btnTouch = (Button) findViewById(R.id.btnTouchControl);
-        btnTouch.setOnClickListener(this);
+        if (btnTouch != null) {
+            btnTouch.setOnClickListener(this);
+        }
 
 
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -89,7 +98,8 @@ public class ActivityMain extends Activity implements OnClickListener {
         switch (v.getId()) {
             case R.id.btnConnect:
                 if (!connected) {
-                    bt.connect();
+                    //bt.connect();
+                    startActivity(new Intent(this, ActivityDeviceList.class));
                 } else {
                     bt.disconnect();
                 }
@@ -103,6 +113,7 @@ public class ActivityMain extends Activity implements OnClickListener {
                     isAutonomous = false;
                     btnAutonomous.setText(R.string.autonomous);
                 }
+                break;
             case R.id.btnButtonControl:
                 startActivity(new Intent(this, ActivityButton.class));
                 break;

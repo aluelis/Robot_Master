@@ -5,10 +5,16 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 /**
  * Created by szvetlintanyi on 09/04/16.
@@ -132,34 +138,53 @@ public class ActivityTouch extends Activity {
 
     private String command(float x, float y) {
         y *= -1;
+        NumberFormat nf = new DecimalFormat("000");
 
         String directionLeft, directionRight;
         int axisX = Math.round(x * MAX_SPEED / BIG_CIRCLE_SIZE);
         int axisY = Math.round(y * MAX_SPEED / BIG_CIRCLE_SIZE);
 
         if (axisX + axisY > MAX_SPEED) {
-            directionLeft = Integer.toString(MAX_SPEED);
+            directionLeft = "+" + Integer.toString(MAX_SPEED);
         } else if (axisX + axisY < -MAX_SPEED) {
             directionLeft = Integer.toString(-MAX_SPEED);
         } else {
-            directionLeft = Integer.toString(Math.min(MAX_SPEED, axisY + axisX));
+            if(Math.min(MAX_SPEED, axisY + axisX) >= 0){
+                directionLeft = "+" + nf.format(Math.min(MAX_SPEED, axisY + axisX));
+            }else{
+                directionLeft = nf.format(Math.min(MAX_SPEED, axisY + axisX));
+            }
+
         }
 
         if (axisY - axisX > MAX_SPEED) {
-            directionRight = Integer.toString(MAX_SPEED);
+            directionRight = "+" + Integer.toString(MAX_SPEED);
         } else {
-            directionRight = Integer.toString(Math.max(-MAX_SPEED, axisY - axisX));
+            if(Math.max(-MAX_SPEED, axisY - axisX) >=0){
+                directionRight = "+" + nf.format(Math.max(-MAX_SPEED, axisY - axisX));
+            }else {
+                directionRight = nf.format(Math.max(-MAX_SPEED, axisY - axisX));
+            }
         }
 
-        String command = "L" + directionLeft + "R" + directionRight;
+        String command = directionLeft +directionRight +"\n";
+        Log.d("command", command);
         ActivityMain.bt.sendData(command);
         return command;
     }
 
     private void getScreenSize(){
-        Display display = getWindowManager().getDefaultDisplay();
-        setWidth(display.getWidth());
-        setHeight(display.getHeight());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            Point size = new Point();
+            getWindowManager().getDefaultDisplay().getSize(size);
+            setWidth(size.x);
+            setHeight(size.y);
+        }else{
+            Display display = getWindowManager().getDefaultDisplay();
+            setWidth(display.getWidth());
+            setHeight(display.getHeight());
+        }
+
     }
 
     private void setWidth(int width){
