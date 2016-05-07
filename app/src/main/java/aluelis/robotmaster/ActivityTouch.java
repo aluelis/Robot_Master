@@ -1,6 +1,5 @@
 package aluelis.robotmaster;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -19,7 +19,7 @@ import java.text.NumberFormat;
 /**
  * Created by szvetlintanyi on 09/04/16.
  */
-public class ActivityTouch extends Activity {
+public class ActivityTouch extends AppCompatActivity {
 
     TouchView touchView;
     final int MAX_SPEED = 255;

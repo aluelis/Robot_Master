@@ -48,7 +48,7 @@ public class ActivityDeviceList extends AppCompatActivity {
                 }
             }
         });
-        btDevice = new ArrayList<BluetoothDevice>();
+        btDevice = new ArrayList<>();
         requestPermissions();
     }
 
