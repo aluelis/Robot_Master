@@ -8,17 +8,16 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.Toast;
+import mehdi.sakout.fancybuttons.FancyButton;
 
 public class ActivityMain extends AppCompatActivity implements OnClickListener {
-    static private Button btnConnect, btnAutonomous, btnButton, btnTouch;
+    static private FancyButton btnConnect, btnAutonomous, btnButton, btnTouch;
     static boolean connected = false;
     public static IBluetooth bt = null;
-    private boolean isAutonomous = false;
+    public static boolean isAutonomous = false;
     static final int REQUEST_ENABLE_BT = 3;
 
     @Override
@@ -29,22 +28,22 @@ public class ActivityMain extends AppCompatActivity implements OnClickListener {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        btnConnect = (Button) findViewById(R.id.btnConnect);
+        btnConnect = (FancyButton) findViewById(R.id.btnConnect);
         if (btnConnect != null) {
             btnConnect.setOnClickListener(this);
         }
 
-        btnAutonomous = (Button) findViewById(R.id.btnAutonomous);
+        btnAutonomous = (FancyButton) findViewById(R.id.btnAutonomous);
         if (btnAutonomous != null) {
             btnAutonomous.setOnClickListener(this);
         }
 
-        btnButton = (Button) findViewById(R.id.btnButtonControl);
+        btnButton = (FancyButton) findViewById(R.id.btnButtonControl);
         if (btnButton != null) {
             btnButton.setOnClickListener(this);
         }
 
-        btnTouch = (Button) findViewById(R.id.btnTouchControl);
+        btnTouch = (FancyButton) findViewById(R.id.btnTouchControl);
         if (btnTouch != null) {
             btnTouch.setOnClickListener(this);
         }
@@ -81,18 +80,23 @@ public class ActivityMain extends AppCompatActivity implements OnClickListener {
             int status = msg.arg1;
             if (status == IBluetooth.CONNECTED) {
                 connected = true;
-                Log.d("STATE", "Connected");
-                btnConnect.setText(R.string.connected);
+                btnConnect.setText(bt.getContext().getString(R.string.connected));
+                btnConnect.setBackgroundColor(bt.getContext().getResources().getColor(R.color.android_green));
                 btnAutonomous.setVisibility(View.VISIBLE);
+                btnButton.setVisibility(View.VISIBLE);
+                btnTouch.setVisibility(View.VISIBLE);
+                isAutonomous = false;
+                btnAutonomous.setText(bt.getContext().getString(R.string.autonomous));
+                btnAutonomous.setBackgroundColor(bt.getContext().getResources().getColor(R.color.primary_color));
                 btnButton.setVisibility(View.VISIBLE);
                 btnTouch.setVisibility(View.VISIBLE);
             } else if (status == IBluetooth.DISCONNECTED) {
                 connected = false;
-                btnConnect.setText(R.string.disconnected);
+                btnConnect.setText(bt.getContext().getString(R.string.disconnected));
+                btnConnect.setBackgroundColor(bt.getContext().getResources().getColor(R.color.primary_color));
                 btnAutonomous.setVisibility(View.GONE);
                 btnButton.setVisibility(View.GONE);
                 btnTouch.setVisibility(View.GONE);
-                Log.d("STATE", "Disconnected");
             }
         }
     }
@@ -102,7 +106,6 @@ public class ActivityMain extends AppCompatActivity implements OnClickListener {
         switch (v.getId()) {
             case R.id.btnConnect:
                 if (!connected) {
-                    //bt.connect();
                     startActivity(new Intent(this, ActivityDeviceList.class));
                 } else {
                     bt.disconnect();
@@ -112,10 +115,16 @@ public class ActivityMain extends AppCompatActivity implements OnClickListener {
                 bt.sendData("A");
                 if (!isAutonomous) {
                     isAutonomous = true;
-                    btnAutonomous.setText(R.string.manual);
+                    btnAutonomous.setText(getString(R.string.manual));
+                    btnAutonomous.setBackgroundColor(bt.getContext().getResources().getColor(R.color.android_green));
+                    btnButton.setVisibility(View.GONE);
+                    btnTouch.setVisibility(View.GONE);
                 } else {
                     isAutonomous = false;
-                    btnAutonomous.setText(R.string.autonomous);
+                    btnAutonomous.setText(getString(R.string.autonomous));
+                    btnAutonomous.setBackgroundColor(bt.getContext().getResources().getColor(R.color.primary_color));
+                    btnButton.setVisibility(View.VISIBLE);
+                    btnTouch.setVisibility(View.VISIBLE);
                 }
                 break;
             case R.id.btnButtonControl:

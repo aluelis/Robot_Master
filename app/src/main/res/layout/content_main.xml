@@ -1,40 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center_horizontal"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <Button
+    <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btnConnect"
-        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/disconnected" />
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="10dp"
+        fancy:fb_radius="30dp"
+        fancy:fb_defaultColor="@color/primary_color"
+        fancy:fb_text="@string/disconnected"
+        fancy:fb_textSize="15sp"
+        fancy:fb_textColor="@android:color/white"
+        fancy:fb_borderColor="@color/primary_color_dark"
+        fancy:fb_borderWidth="1dp" />
 
-    <Button
+    <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btnAutonomous"
-        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@id/btnConnect"
-        android:text="@string/autonomous"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        fancy:fb_radius="30dp"
+        fancy:fb_defaultColor="@color/primary_color"
+        fancy:fb_text="@string/autonomous"
+        fancy:fb_textSize="15sp"
+        fancy:fb_textColor="@android:color/white"
+        fancy:fb_borderColor="@color/primary_color_dark"
+        fancy:fb_borderWidth="1dp" />
 
-    <Button
+    <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btnButtonControl"
-        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@id/btnAutonomous"
-        android:text="@string/button"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        fancy:fb_radius="30dp"
+        fancy:fb_defaultColor="@color/primary_color"
+        fancy:fb_text="@string/button"
+        fancy:fb_textSize="15sp"
+        fancy:fb_textColor="@android:color/white"
+        fancy:fb_borderColor="@color/primary_color_dark"
+        fancy:fb_borderWidth="1dp"/>
 
-    <Button
+    <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btnTouchControl"
-        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@id/btnButtonControl"
-        android:text="@string/touch"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        fancy:fb_radius="30dp"
+        fancy:fb_defaultColor="@color/primary_color"
+        fancy:fb_text="@string/touch"
+        fancy:fb_textSize="15sp"
+        fancy:fb_textColor="@android:color/white"
+        fancy:fb_borderColor="@color/primary_color_dark"
+        fancy:fb_borderWidth="1dp"/>
 
 </RelativeLayout>

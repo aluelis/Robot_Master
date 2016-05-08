@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -78,6 +79,9 @@ public class IBluetooth {
     }
 
     public void disconnect() {
+
+        sendData("+000+000\n");
+
         try {
             socket.close();
 
@@ -103,8 +107,15 @@ public class IBluetooth {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             return bluetoothDevice.createBond();
         } else {
-            //TODO reflection
-            throw new NoSuchMethodError();
+            try {
+
+                Method m = bluetoothDevice.getClass().getMethod("createBond", (Class[]) null);
+                m.invoke(bluetoothDevice, (Object[]) null);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
         }
     }
 
@@ -122,4 +133,7 @@ public class IBluetooth {
     }
 
 
+    public Context getContext() {
+        return context;
+    }
 }
