@@ -7,11 +7,14 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -22,6 +25,7 @@ import java.text.NumberFormat;
 public class ActivityTouch extends AppCompatActivity {
 
     TouchView touchView;
+    LinearLayout container;
     final int MAX_SPEED = 255;
     private int FINGER_CIRCLE_SIZE;
     private int BIG_CIRCLE_SIZE;
@@ -30,6 +34,26 @@ public class ActivityTouch extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_touch);
+
+        container = (LinearLayout) findViewById(R.id.touchContainer);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if (toolbar != null && getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+
+        }
+
         getScreenSize();
         if(getResources().getConfiguration().orientation == 1) {
             BIG_CIRCLE_SIZE = (int) (screenWidth * 0.45);
@@ -39,7 +63,7 @@ public class ActivityTouch extends AppCompatActivity {
             FINGER_CIRCLE_SIZE = (int) (BIG_CIRCLE_SIZE * 0.1);
         }
         touchView = new TouchView(this);
-        setContentView(touchView);
+        container.addView(touchView);
     }
 
     public class TouchView extends View {

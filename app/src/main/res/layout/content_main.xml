@@ -23,7 +23,7 @@
         fancy:fb_textSize="15sp"
         fancy:fb_textColor="@android:color/white"
         fancy:fb_borderColor="@color/primary_color_dark"
-        fancy:fb_borderWidth="1dp" />
+        fancy:fb_borderWidth="2dp" />
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btnAutonomous"
@@ -43,7 +43,7 @@
         fancy:fb_textSize="15sp"
         fancy:fb_textColor="@android:color/white"
         fancy:fb_borderColor="@color/primary_color_dark"
-        fancy:fb_borderWidth="1dp" />
+        fancy:fb_borderWidth="2dp" />
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btnButtonControl"
@@ -63,7 +63,7 @@
         fancy:fb_textSize="15sp"
         fancy:fb_textColor="@android:color/white"
         fancy:fb_borderColor="@color/primary_color_dark"
-        fancy:fb_borderWidth="1dp"/>
+        fancy:fb_borderWidth="2dp"/>
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btnTouchControl"
@@ -83,6 +83,6 @@
         fancy:fb_textSize="15sp"
         fancy:fb_textColor="@android:color/white"
         fancy:fb_borderColor="@color/primary_color_dark"
-        fancy:fb_borderWidth="1dp"/>
+        fancy:fb_borderWidth="2dp"/>
 
 </RelativeLayout>

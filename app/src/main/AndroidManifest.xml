@@ -10,7 +10,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".ActivityMain"
             android:label="@string/app_name"
@@ -24,11 +24,11 @@
         <activity
             android:name=".ActivityButton"
             android:label="@string/button"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ActivityTouch"
             android:label="@string/touch"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ActivityDeviceList"
             android:label="@string/search_results"
             android:theme="@style/AppThemeDialog" />
